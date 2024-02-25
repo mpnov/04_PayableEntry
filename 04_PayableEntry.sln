@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34408.163
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04_PayableEntry", "04_PayableEntry\04_PayableEntry.csproj", "{D4F6605F-5BFD-4828-BF7D-F3F1851965E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayableDAL_ADO", "PayableDAL_ADO\PayableDAL_ADO.csproj", "{517A030D-D7E1-43E7-A71B-4DD7CA8D6DDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4F6605F-5BFD-4828-BF7D-F3F1851965E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4F6605F-5BFD-4828-BF7D-F3F1851965E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4F6605F-5BFD-4828-BF7D-F3F1851965E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4F6605F-5BFD-4828-BF7D-F3F1851965E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{517A030D-D7E1-43E7-A71B-4DD7CA8D6DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{517A030D-D7E1-43E7-A71B-4DD7CA8D6DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{517A030D-D7E1-43E7-A71B-4DD7CA8D6DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{517A030D-D7E1-43E7-A71B-4DD7CA8D6DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {87DDE86D-935D-4FBA-A1BF-D3808759092F}
+	EndGlobalSection
+EndGlobal
