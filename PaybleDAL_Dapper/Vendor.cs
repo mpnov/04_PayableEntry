@@ -20,6 +20,6 @@ namespace PayableDAL
         public string? ContactFName { get; set; }
         public int DefaultTermsID { get; set; }
         public int DefaultAccountNo { get; set; }
-        public string LongAddress => $"{Name}.{Address1}." + ((Address2 != null) ? $"{Address2}." : "") + $"{City}.{State} {ZipCode}";
+        public string LongAddress => $"{Name}.{Address1}." + ((Address2 != null) ? $"{Address2}.":"") + $"{City}.{State} {ZipCode}";
     }
 }

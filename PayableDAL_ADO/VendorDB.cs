@@ -7,7 +7,7 @@ using System.Data;
 using Microsoft.Data.SqlClient;
 using System.Numerics;
 
-namespace PayableDAL_ADO
+namespace PayableDAL
 {
     public static class VendorDB
     {
@@ -83,7 +83,8 @@ namespace PayableDAL_ADO
             string strInsert = "INSERT Vendors " +
                 "(Name, Address1, Address2, City, State, ZipCode, Phone, ContactLName, ContactFName, DefaultTermsID, DefaultAccountNo) " +
                 "VALUES " +
-                "(@Name, @Address1, @Address2, @City, @State, @ZipCode, @Phone, @ContactLName, @ContactFName, @DefaultTermsID, @DefaultAccountNo)";
+                "(@Name, @Address1, @Address2, @City, @State, @ZipCode, @Phone, @ContactLName, @ContactFName, @DefaultTermsID, @DefaultAccountNo);" +
+                "SELECT SCOPE_IDENTITY();";
             using SqlConnection connection = new SqlConnection(PayableDB.ConnectionString);
             using SqlCommand command = new SqlCommand(strInsert, connection);
             command.Parameters.AddWithValue("@Name", vendor.Name);
@@ -98,14 +99,9 @@ namespace PayableDAL_ADO
             command.Parameters.AddWithValue("@DefaultTermsID", vendor.DefaultTermsID);
             command.Parameters.AddWithValue("@DefaultAccountNo", vendor.DefaultAccountNo);
             connection.Open();
-            int count = command.ExecuteNonQuery();
-            if(count > 0)
-            {
-                string strSelect = "SELECT IDENT_CURRENT('Vendors') FROM Vendors";
-                command.CommandText = strSelect;
-                vendor.VendorID = Convert.ToInt32(command.ExecuteScalar());
-            }
-            return (count > 0);
+            vendor.VendorID = Convert.ToInt32(command.ExecuteScalar());
+
+            return (vendor.VendorID > 0);
         }
 
         public static bool UpdateVendor(Vendor oldVendor, Vendor vendor)

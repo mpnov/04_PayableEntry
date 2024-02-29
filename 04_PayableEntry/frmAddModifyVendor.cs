@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.IdentityModel.Tokens;
-using PayableDAL_ADO;
+using PayableDAL;
 
 namespace _04_PayableEntry
 {
@@ -70,7 +70,7 @@ namespace _04_PayableEntry
             if (terms != null)
             {
                 cmbTerms.DataSource = terms;
-                cmbTerms.DisplayMember = nameof(Term.Descrtiption);
+                cmbTerms.DisplayMember = nameof(Term.Description);
                 cmbTerms.ValueMember = nameof(Term.TermsID);
                 cmbTerms.SelectedIndex = -1;
             }

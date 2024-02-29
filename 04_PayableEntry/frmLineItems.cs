@@ -1,4 +1,4 @@
-﻿using PayableDAL_ADO;
+﻿using PayableDAL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

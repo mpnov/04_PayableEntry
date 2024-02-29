@@ -31,5 +31,32 @@ namespace _04_PayableEntry
 
             return msg;
         }
+
+        public static string IsDecimal(string value, string name)
+        {
+            string msg = string.Empty;
+
+            if(!decimal.TryParse(value, out _))
+            {
+                msg = $"{name} value must be a decimal";
+            }
+
+            return msg;
+        }
+
+        public static string IsInRange(string value, string name, decimal min, decimal max)
+        {
+            string msg = string.Empty;
+
+            if(decimal.TryParse(value, out decimal val))
+            {
+                if(val < min || val > max)
+                {
+                    msg = $"{name} value must be between {min} and {max}";
+                }
+            }
+
+            return msg;
+        }
     }
 }

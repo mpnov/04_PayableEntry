@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using Microsoft.Data.SqlClient;
 
-namespace PayableDAL_ADO
+namespace PayableDAL
 {
     public static class InvoiceDB
     {
@@ -17,7 +17,7 @@ namespace PayableDAL_ADO
                 "CreditTotal, TermsID, DueDate, PaymentDate " +
                 "FROM Invoices " +
                 "WHERE VendorID = @VendorID " +
-                "ORDER BY InvoiceNumber";
+                "ORDER BY InvoiceDate";
             using SqlConnection connection = new SqlConnection(PayableDB.ConnectionString);
             using SqlCommand command = new SqlCommand(strSelect, connection);
             command.Parameters.AddWithValue("@VendorID", vendorID);

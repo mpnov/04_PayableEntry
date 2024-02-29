@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PayableDAL_ADO;
+using PayableDAL;
 
 namespace _04_PayableEntry
 {

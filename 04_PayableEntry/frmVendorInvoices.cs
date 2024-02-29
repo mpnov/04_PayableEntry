@@ -1,5 +1,5 @@
 using Microsoft.IdentityModel.Tokens;
-using PayableDAL_ADO;
+using PayableDAL;
 
 namespace _04_PayableEntry
 {
@@ -66,7 +66,7 @@ namespace _04_PayableEntry
                 dgvInvoices.Columns[0].Visible = false;//InvoiceID
                 dgvInvoices.Columns[1].HeaderText = "Number";
                 dgvInvoices.Columns[2].HeaderText = "Invoice Date";
-                dgvInvoices.Columns[2].DefaultCellStyle.Format = "dd.mm.yyyy";
+                dgvInvoices.Columns[2].DefaultCellStyle.Format = "dd.MM.yyyy";
                 dgvInvoices.Columns[3].HeaderText = "Invoice Total";
                 dgvInvoices.Columns[3].DefaultCellStyle.Format = "c";
                 dgvInvoices.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -80,7 +80,7 @@ namespace _04_PayableEntry
                 dgvInvoices.Columns[6].DefaultCellStyle.Format = "c";
                 dgvInvoices.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 dgvInvoices.Columns[7].HeaderText = "Due Date";
-                dgvInvoices.Columns[7].DefaultCellStyle.Format = "dd.mm.yyyy";
+                dgvInvoices.Columns[7].DefaultCellStyle.Format = "dd.MM.yyyy";
 
                 //format headers
                 //dgvInvoices.EnableHeadersVisualStyles = false;
@@ -126,6 +126,8 @@ namespace _04_PayableEntry
                 txtCity.Text = selectedVendor.City;
                 txtState.Text = selectedVendor.State;
                 txtZip.Text = selectedVendor.ZipCode;
+                btnAddInvoice.Enabled = true;
+                btnModifyVendor.Enabled = true;
             }
 
         }
@@ -182,6 +184,8 @@ namespace _04_PayableEntry
             txtZip.Text = string.Empty;
             dgvInvoices.DataSource = null;
             dgvInvoices.Columns.Clear();
+            btnAddInvoice.Enabled = false;
+            btnModifyVendor.Enabled = false;
         }
 
         private void frmVendorInvoices_Load(object sender, EventArgs e)
@@ -271,17 +275,40 @@ namespace _04_PayableEntry
 
         private void dgvInvoices_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == 8)//button
+            if (e.ColumnIndex == 8)//button
             {
                 try
                 {
-                    int invoiceID = (int) dgvInvoices.Rows[e.RowIndex].Cells[0].Value;
+                    int invoiceID = (int)dgvInvoices.Rows[e.RowIndex].Cells[0].Value;
                     List<InvoiceLineItem> items = InvoiceLineItemDB.GetInvoiceLineItems(invoiceID);
                     frmLineItems frm = new frmLineItems();
                     frm.VendorName = selectedVendor.Name;
                     frm.InvoiceNumber = dgvInvoices.Rows[e.RowIndex].Cells[1].Value.ToString();
                     frm.LineItems = items;
                     DialogResult result = frm.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    GeneralError(ex);
+                }
+            }
+        }
+
+        private void btnAddInvoice_Click(object sender, EventArgs e)
+        {
+
+            frmAddInvoice frm = new frmAddInvoice();
+            frm.vendor = selectedVendor;
+            frm.terms = terms;
+            frm.accounts = accounts;
+            DialogResult result = frm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    selectedInvoices = InvoiceDB.GeVendorInvoices(selectedVendor.VendorID);
+                    DisplayVendor();
+                    DisplayInvoices();
                 }
                 catch (Exception ex)
                 {

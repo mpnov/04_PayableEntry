@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using Microsoft.Data.SqlClient;
+using Dapper;
 
 namespace PayableDAL
 {
@@ -16,19 +17,9 @@ namespace PayableDAL
             string strSelect = "SELECT StateCode, StateName, FirstZipCode, LastZipCode " +
                 "FROM States " +
                 "ORDER BY StateCode";
+
             using SqlConnection connection = new SqlConnection(PayableDB.ConnectionString);
-            using SqlCommand command = new SqlCommand(strSelect, connection);
-            connection.Open();
-            using SqlDataReader reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-            while(reader.Read())
-            {
-                State state = new State();
-                state.StateCode = reader["StateCode"].ToString();
-                state.StateName = reader["StateName"].ToString();
-                state.FirstZipCode = (int)reader["FirstZipCode"];
-                state.LastZipCode = (int)reader["LastZipCode"];
-                states.Add(state);
-            }
+            states = connection.Query<State>(strSelect).ToList();
 
             return states;
         }

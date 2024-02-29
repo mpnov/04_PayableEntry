@@ -173,6 +173,7 @@
             // 
             // btnModifyVendor
             // 
+            btnModifyVendor.Enabled = false;
             btnModifyVendor.Location = new Point(537, 89);
             btnModifyVendor.Name = "btnModifyVendor";
             btnModifyVendor.Size = new Size(99, 23);
@@ -192,12 +193,14 @@
             // 
             // btnAddInvoice
             // 
+            btnAddInvoice.Enabled = false;
             btnAddInvoice.Location = new Point(24, 383);
             btnAddInvoice.Name = "btnAddInvoice";
             btnAddInvoice.Size = new Size(99, 23);
             btnAddInvoice.TabIndex = 16;
             btnAddInvoice.Text = "Add &Invoice";
             btnAddInvoice.UseVisualStyleBackColor = true;
+            btnAddInvoice.Click += btnAddInvoice_Click;
             // 
             // btnExit
             // 
